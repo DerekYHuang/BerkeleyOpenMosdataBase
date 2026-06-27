@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: stg_transistor_raw
+    description: "Staged BOMB transistor characterization data from UC Berkeley EECS"
+    columns:
+      - name: characterization_id
+        description: "Surrogate key for each transistor measurement"
+        tests:
+          - unique
+          - not_null
+      - name: temperature_c
+        description: "Temperature in Celsius"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [-20, 27, 120]
+      - name: thermal_stress_flag
+        description: "1 if temperature >= 120C, else 0"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0, 1]
+      - name: ibias
+        tests:
+          - not_null
+
+  - name: fact_transistor_characterization
+    description: "Core fact table: one row per transistor measurement across all sweep dimensions"
+    columns:
+      - name: characterization_id
+        tests:
+          - unique
+          - not_null
+      - name: device_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_device')
+              field: device_key
+      - name: temperature_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_temperature')
+              field: temperature_key
+
+  - name: dim_device
+    columns:
+      - name: device_key
+        tests:
+          - unique
+          - not_null
+      - name: device_voltage_class
+        tests:
+          - accepted_values:
+              values: ['LVT', 'HVT', 'NOM']
+
+  - name: dim_temperature
+    columns:
+      - name: temperature_key
+        tests:
+          - unique
+          - not_null
+      - name: thermal_regime
+        tests:
+          - accepted_values:
+              values: ['Sub-Zero', 'Ambient', 'Elevated', 'High-Stress']
