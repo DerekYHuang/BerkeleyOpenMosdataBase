@@ -3,7 +3,7 @@
 -- Source: bomb_transistor_flat.parquet loaded into S3 / Redshift
 
 with raw as (
-    select * from {{ source('bomb_raw', 'bomb_transistor_flat') }}
+    select * from {{ ref('load_parquet') }}
 ),
 
 staged as (

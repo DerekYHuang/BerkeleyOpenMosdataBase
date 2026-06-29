@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: bomb_raw
+    schema: main
+    tables:
+      - name: bomb_transistor_flat
+        description: "Flattened BOMB transistor characterization data from Parquet"
