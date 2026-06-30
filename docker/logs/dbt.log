@@ -1,0 +1,45 @@
+[0m12:16:17.434657 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C43A3E44C0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C43B6C83A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C43B6C8190>]}
+
+
+============================== 12:16:17.441691 | 3ee013cb-18aa-4ee6-bf35-fe2c151a4260 ==============================
+[0m12:16:17.441691 [info ] [MainThread]: Running with dbt=1.11.11
+[0m12:16:17.442690 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': '.', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt run --profiles-dir . --target prod', 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m12:16:17.473900 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path G:\Berkeley Open MOS dataBase\BerkeleyOpenMosdataBase\docker\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m12:16:17.475914 [debug] [MainThread]: Command `dbt run` failed at 12:16:17.475914 after 0.18 seconds
+[0m12:16:17.476914 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C43A3E44C0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C43B6C8190>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C43B6C8460>]}
+[0m12:16:17.476914 [debug] [MainThread]: Flushing usage events
+[0m12:16:18.029206 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:16:20.854980 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000240AAEF8490>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000240AD1B0370>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000240AD1B0160>]}
+
+
+============================== 12:16:20.859993 | bcd6fb77-addb-44b4-ad97-30ee6cb442d6 ==============================
+[0m12:16:20.859993 [info ] [MainThread]: Running with dbt=1.11.11
+[0m12:16:20.860980 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': '.', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'use_colors': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt test --profiles-dir . --target prod', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m12:16:20.861993 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path G:\Berkeley Open MOS dataBase\BerkeleyOpenMosdataBase\docker\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m12:16:20.863980 [debug] [MainThread]: Command `dbt test` failed at 12:16:20.863980 after 0.12 seconds
+[0m12:16:20.864993 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000240AAEF8490>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000240AD1B0160>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000240AD1B0430>]}
+[0m12:16:20.864993 [debug] [MainThread]: Flushing usage events
+[0m12:16:21.231432 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:16:41.049093 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A565FB8430>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A56729C3A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A56729C190>]}
+
+
+============================== 12:16:41.055090 | b2ff8443-0366-4b15-9b39-542eb26c49ef ==============================
+[0m12:16:41.055090 [info ] [MainThread]: Running with dbt=1.11.11
+[0m12:16:41.056093 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': '.', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'indirect_selection': 'eager', 'use_colors': 'True', 'invocation_command': 'dbt run --profiles-dir . --target prod', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m12:16:41.057092 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path G:\Berkeley Open MOS dataBase\BerkeleyOpenMosdataBase\docker\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m12:16:41.059091 [debug] [MainThread]: Command `dbt run` failed at 12:16:41.059091 after 0.12 seconds
+[0m12:16:41.060091 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A565FB8430>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A56729C190>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A56729C460>]}
+[0m12:16:41.061091 [debug] [MainThread]: Flushing usage events
+[0m12:16:41.465477 [debug] [MainThread]: An error was encountered while trying to flush usage events
