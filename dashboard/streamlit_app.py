@@ -41,6 +41,13 @@ TEXT       = "#E5E7EB"
 TEXT_DIM   = "#6B7280"
 WHITE      = "#FFFFFF"
 
+def hex_to_rgba(hex_color: str, alpha: float = 0.2) -> str:
+    """Convert #RRGGBB to rgba() — Plotly rejects 8-digit hex like #00D4FF33."""
+    hex_color = hex_color.lstrip("#")[:6]
+    r, g, b = int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16)
+    return f"rgba({r}, {g}, {b}, {alpha})"
+
+
 PLOTLY_TEMPLATE = dict(
     layout=dict(
         paper_bgcolor="rgba(0,0,0,0)",
@@ -497,14 +504,16 @@ with col1:
     labels_temp  = {-20: "−20°C  (Sub-Zero)", 27: "27°C  (Ambient)", 120: "120°C  (High-Stress)"}
 
     for t in temps_sorted:
+        t_key = int(t)
         sub = sample[sample["temperature_c"] == t]["ibias_abs"]
+        color = colors_temp.get(t_key, CYAN)
         fig.add_trace(go.Violin(
             y=np.log10(sub + 1e-12),
-            name=labels_temp.get(t, f"{t}°C"),
+            name=labels_temp.get(t_key, f"{t}°C"),
             box_visible=True,
             meanline_visible=True,
-            fillcolor=colors_temp.get(t, CYAN) + "33",
-            line_color=colors_temp.get(t, CYAN),
+            fillcolor=hex_to_rgba(color, 0.2),
+            line_color=color,
             opacity=0.85,
         ))
 
