@@ -53,13 +53,25 @@ PLOTLY_TEMPLATE = dict(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor=SURFACE,
         font=dict(family="JetBrains Mono, monospace", color=TEXT, size=12),
-        title=dict(font=dict(color=WHITE, size=14)),
         xaxis=dict(gridcolor=BORDER, linecolor=BORDER, tickcolor=TEXT_DIM, color=TEXT_DIM),
         yaxis=dict(gridcolor=BORDER, linecolor=BORDER, tickcolor=TEXT_DIM, color=TEXT_DIM),
         colorway=[CYAN, ORANGE, AMBER, GREEN, "#A78BFA", "#F472B6"],
         margin=dict(l=40, r=20, t=40, b=40),
     )
 )
+
+
+def plotly_layout(**kwargs):
+    """Apply dashboard layout without duplicate title/axis kwargs (Plotly 6+)."""
+    layout = dict(PLOTLY_TEMPLATE["layout"])
+    title = kwargs.get("title")
+    if isinstance(title, str):
+        kwargs["title"] = dict(text=title, font=dict(color=WHITE, size=14))
+    for axis in ("xaxis", "yaxis"):
+        if axis in kwargs and axis in layout:
+            kwargs[axis] = {**layout[axis], **kwargs[axis]}
+    layout.update(kwargs)
+    return layout
 
 # ── Custom CSS ─────────────────────────────────────────────────────────────────
 st.markdown(f"""
@@ -517,15 +529,14 @@ with col1:
             opacity=0.85,
         ))
 
-    fig.update_layout(
-        **PLOTLY_TEMPLATE["layout"],
+    fig.update_layout(**plotly_layout(
         title="log₁₀(|I_bias|) Distribution by Temperature",
         yaxis_title="log₁₀(|I_bias|)  [A]",
         showlegend=True,
         legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=TEXT_DIM, size=11)),
         height=360,
         violingap=0.2,
-    )
+    ))
     st.plotly_chart(fig, use_container_width=True)
 
 with col2:
@@ -548,11 +559,10 @@ with col2:
         showscale=True,
         colorbar=dict(title="log₁₀(|I|)", tickfont=dict(color=TEXT_DIM)),
     ))
-    fig2.update_layout(
-        **PLOTLY_TEMPLATE["layout"],
+    fig2.update_layout(**plotly_layout(
         title="Avg log₁₀(|I_bias|) · Device × Temperature",
         height=360,
-    )
+    ))
     st.plotly_chart(fig2, use_container_width=True)
 
 
@@ -597,13 +607,12 @@ with col3:
             showlegend=False,
         ))
 
-    fig3.update_layout(
-        **PLOTLY_TEMPLATE["layout"],
+    fig3.update_layout(**plotly_layout(
         title="Mean log₁₀(|I_bias|) by Process Corner ± σ",
         yaxis_title="log₁₀(|I_bias|)  [A]",
         height=320,
         bargap=0.35,
-    )
+    ))
     st.plotly_chart(fig3, use_container_width=True)
 
 with col4:
@@ -626,11 +635,10 @@ with col4:
         title="Monte Carlo Coefficient of Variation (%) by Device × Corner",
         category_orders={"process_label": ["slow-slow", "typical", "fast-fast"]},
     )
-    fig4.update_layout(
-        **PLOTLY_TEMPLATE["layout"],
+    fig4.update_layout(**plotly_layout(
         height=320,
         legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=TEXT_DIM, size=10)),
-    )
+    ))
     st.plotly_chart(fig4, use_container_width=True)
 
 
@@ -656,14 +664,13 @@ with col5:
             name=dvc,
             marker=dict(size=3, opacity=0.5),
         ))
-    fig5.update_layout(
-        **PLOTLY_TEMPLATE["layout"],
+    fig5.update_layout(**plotly_layout(
         title="log₁₀(|I_bias|) vs log₁₀(g_m proxy) — all device types",
         xaxis_title="log₁₀(|I_bias|)  [A]",
         yaxis_title="log₁₀(g_m proxy)  [S]",
         height=320,
         legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(color=TEXT_DIM, size=10)),
-    )
+    ))
     st.plotly_chart(fig5, use_container_width=True)
 
 with col6:
@@ -685,13 +692,12 @@ with col6:
             showscale=False,
         ),
     ))
-    fig6.update_layout(
-        **PLOTLY_TEMPLATE["layout"],
+    fig6.update_layout(**plotly_layout(
         title="% Measurements at ≥120°C by Device",
         xaxis_title="% High-Stress",
         height=320,
-        yaxis=dict(tickfont=dict(size=10), **PLOTLY_TEMPLATE["layout"]["yaxis"]),
-    )
+        yaxis=dict(tickfont=dict(size=10)),
+    ))
     st.plotly_chart(fig6, use_container_width=True)
 
 
