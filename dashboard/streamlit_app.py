@@ -292,13 +292,10 @@ st.markdown(f"""
 # ── Data loading ───────────────────────────────────────────────────────────────
 
 EXPORTS_DIR = os.path.join(os.path.dirname(__file__), "data", "exports")
-USING_REAL_DATA = False
 
 @st.cache_data
 def load_data():
     """Load exported dbt CSVs. Falls back to synthetic data if not found."""
-    global USING_REAL_DATA
-
     fact_path    = os.path.join(EXPORTS_DIR, "fact_transistor_characterization.csv")
     device_path  = os.path.join(EXPORTS_DIR, "dim_device.csv")
     temp_path    = os.path.join(EXPORTS_DIR, "dim_temperature.csv")
@@ -309,10 +306,10 @@ def load_data():
         devices = pd.read_csv(device_path)
         temps   = pd.read_csv(temp_path)
         corners = pd.read_csv(process_path)
-        USING_REAL_DATA = True
         return fact, devices, temps, corners, True
-    else:
-        return generate_synthetic_data(), False
+
+    fact, _, _, _ = generate_synthetic_data()
+    return fact, None, None, None, False
 
 
 def generate_synthetic_data():
@@ -358,12 +355,7 @@ def generate_synthetic_data():
     return fact, None, None, None
 
 
-data_result = load_data()
-if isinstance(data_result[0], tuple):
-    fact, devices, temps, corners, using_real = data_result
-    fact_df = fact
-else:
-    (fact_df, _, _, _), using_real = data_result
+fact_df, devices, temps, corners, using_real = load_data()
 
 
 # ── Hero ───────────────────────────────────────────────────────────────────────
